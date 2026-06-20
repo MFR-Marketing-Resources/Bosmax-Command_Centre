@@ -1,0 +1,17 @@
+{
+	"name": "bosmax-command-centre",
+	"version": "1.0.0",
+	"private": true,
+	"description": "BOSMAX Command Centre repo-local tooling surface for lint, dependency audit, and Mandor validation.",
+	"scripts": {
+		"mandor:check": "tsx scripts/mandor-check.ts",
+		"lint:biome": "biome check .",
+		"lint:biome:write": "biome check --write .",
+		"depcruise:repo": "dependency-cruiser scripts --no-config --output-type err"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"dependency-cruiser": "^17.4.3",
+		"tsx": "^4.19.4"
+	}
+}

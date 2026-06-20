@@ -1,0 +1,5 @@
+{
+	"files": {
+		"ignore": ["knowledge-pack/**", "node_modules/**"]
+	}
+}
