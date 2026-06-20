@@ -5,6 +5,7 @@ import hashlib
 import json
 import sys
 from pathlib import Path
+from zipfile import ZipFile
 
 import openpyxl
 import yaml
@@ -47,6 +48,14 @@ def sha256_for(path: Path) -> str:
         for chunk in iter(lambda: handle.read(65536), b""):
             digest.update(chunk)
     return digest.hexdigest().upper()
+
+
+def inspect_macro_payload(path: Path) -> tuple[bool, bool]:
+    with ZipFile(path) as archive:
+        names = {name.lower() for name in archive.namelist()}
+    has_vba_project = any(name.endswith("vbaproject.bin") for name in names)
+    has_macrosheet = any("macrosheets/" in name for name in names)
+    return has_vba_project, has_macrosheet
 
 
 def main() -> int:
@@ -157,7 +166,17 @@ def main() -> int:
     )
 
     print("== MACRO STATUS ==")
-    print("NOT VERIFIED: Excel macro execution was not run.")
+    wps_path = EXPECTED_FILES["WPS_Blocking_Template_REPAIRED.xlsx"]
+    has_vba_project, has_macrosheet = inspect_macro_payload(wps_path)
+    print(f"WPS workbook extension: {wps_path.suffix.lower()}")
+    print(f"Embedded vbaProject.bin present: {has_vba_project}")
+    print(f"Embedded macro sheet present: {has_macrosheet}")
+    if has_vba_project or has_macrosheet or wps_path.suffix.lower() == ".xlsm":
+        print("NOT VERIFIED: Macro-capable workbook detected, but Excel macro execution was not run.")
+    else:
+        print(
+            "NOT APPLICABLE: Retained WPS workbook is a non-macro .xlsx package with no embedded VBA payload."
+        )
 
     if errors:
         print("== RESULT ==")
