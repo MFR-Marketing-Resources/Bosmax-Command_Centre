@@ -8,7 +8,9 @@
 - Review JSON, YAML, CSV, and XLSX validation output.
 - Review manifest SHA256 comparisons.
 - Review the retained-package count note.
-- Confirm macro execution remains marked `NOT VERIFIED` unless actually executed.
+- Confirm the macro status line is structurally correct:
+  - `NOT APPLICABLE` for a non-macro `.xlsx` package with no embedded VBA payload.
+  - `NOT VERIFIED` only if a macro-capable workbook is actually retained.
 - Review `git status --short` and `git diff --stat`.
 
 ## Pre-Release

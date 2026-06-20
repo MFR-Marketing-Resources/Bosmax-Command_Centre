@@ -62,6 +62,7 @@ npx tsx scripts/mandor-check.ts
 - The manifest content currently lists 10 rows, including the manifest itself as `SELF_REFERENCE_NOT_HASHED`.
 - `VIDEO_PROMPT_COMPILER_TEMPLATES.yaml` required syntax-only scalar quoting to satisfy strict YAML parsing.
 - The retained manifest has been refreshed to match the current repository-retained bytes for the three drifted files while keeping the historical `11` filename label intact.
+- `knowledge-pack/wps/WPS_Blocking_Template_REPAIRED.xlsx` is retained as a non-macro `.xlsx` workbook. No embedded `vbaProject.bin` payload is present, so macro execution is treated as `NOT APPLICABLE` for this retained package.
 
 ## Warning
 
