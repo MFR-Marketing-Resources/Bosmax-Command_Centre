@@ -1,0 +1,23 @@
+modules:
+  bosmax_command_centre_repository_governance:
+    status: IN_PROGRESS
+    owner: CODEX
+    scope:
+      - README.md
+      - AGENTS.md
+      - SKILLS.md
+      - CHANGELOG.md
+      - docs/**
+      - scripts/**
+      - knowledge-pack/**
+      - .github/pull_request_template.md
+      - .gitignore
+      - .gitattributes
+      - package.json
+      - package-lock.json
+    notes: >
+      Repository-governance lane for Bosmax Command Centre. Authorizes
+      canonical knowledge-pack placement, validator scripts, release and QA
+      documentation, local Mandor tooling, and syntax-only YAML parseability
+      fixes. Does not authorize business-copy rewrites, workbook-content
+      rewrites, or casual product-truth edits.

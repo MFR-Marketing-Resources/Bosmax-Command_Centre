@@ -33,8 +33,8 @@ rules:
     - FRAMES uses one completed frame as the single visual truth and motion-delta only.
     - INGREDIENTS requires explicit asset_role_map.
     - INGREDIENTS minimum valid asset_role_map is PRODUCT_REFERENCE plus AVATAR_REFERENCE.
-    - STYLE_SCENE_REFERENCE is optional in INGREDIENTS; if absent, require style_scene_source: SCENE_CONTEXT_ONLY and derive environment only from SCENE_CONTEXT.
-    - If STYLE_SCENE_REFERENCE is declared but image_3 is absent or NOT PROVIDED, auto-normalize to the 2-image path: drop the style role and set style_scene_source: SCENE_CONTEXT_ONLY.
+    - "STYLE_SCENE_REFERENCE is optional in INGREDIENTS; if absent, require style_scene_source: SCENE_CONTEXT_ONLY and derive environment only from SCENE_CONTEXT."
+    - "If STYLE_SCENE_REFERENCE is declared but image_3 is absent or NOT PROVIDED, auto-normalize to the 2-image path: drop the style role and set style_scene_source: SCENE_CONTEXT_ONLY."
     - Product truth outranks avatar and style in all modes.
   output_rules:
     - Every block exports one complete 9-section prompt set.

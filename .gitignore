@@ -1,0 +1,30 @@
+# System files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Temp files
+*.tmp
+*.log
+~$*
+
+# Claude session outputs (local only)
+outputs/
+
+__pycache__/
+
+# Node tooling surface
+node_modules/
+.env
+.env.*
+logs/
+tmp/
+temp/
+*.pyc
+.venv/
+venv/
+.idea/
+.vscode/
+~$*.xlsx
+~$*.docx
+~$*.pptx
