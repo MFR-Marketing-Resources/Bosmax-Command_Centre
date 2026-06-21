@@ -1,0 +1,207 @@
+version: 0.1.0
+status: draft_repair_contract
+updated_at: '2026-06-21'
+
+notion_wiring_principles:
+  primary_workflows:
+    - HYBRID
+    - FRAMES
+    - INGREDIENTS
+  manual_snapshot_fields_are_not_authority:
+    - AvatarCode
+    - PromptV1
+    - Compiler Payload / RAW Prompt
+    - Output From Compiler
+  repair_policy:
+    overwrite_manual_fields_before_validation: false
+    create_generated_fields_first: true
+    compare_manual_to_generated: true
+    promote_generated_after_operator_approval: true
+
+sources:
+  avatar_ai:
+    data_source: collection://3854775a-f48a-80a7-9365-000bbe671ff7
+    current_static_fields:
+      - AvatarCode
+      - PromptV1
+    source_fields:
+      - Name
+      - CharacterName
+      - Wardrobe
+      - HairStyle
+      - SkinTone
+      - Expression
+      - Environment
+      - Lighting
+      - Camera
+      - SafetyBlock
+      - approved_flag
+      - usage_tags
+    generated_fields:
+      - AvatarCode_Generated
+      - PromptV1_Generated
+      - AvatarCode_Mismatch
+      - PromptV1_Mismatch
+      - Avatar_Wiring_Status
+      - Avatar_Last_Generated_At
+      - Avatar_Generation_Source
+    sample_broken_page:
+      title: Kenduri 05
+      observed_character_name: Zara
+      observed_avatar_code: BOS_F_AISYAH_05
+      observed_prompt_identity: Aisyah
+      issue: CharacterName changed but AvatarCode and PromptV1 remained stale.
+
+  hybrid_operator_intake:
+    data_source: collection://a47a36cc-ca74-40f7-88d3-2bd9ad67987d
+    current_static_fields:
+      - Compiler Payload / RAW Prompt
+      - Output From Compiler
+    source_fields:
+      - Product
+      - Product Photo Upload
+      - Avatar Ai
+      - Avatar Source
+      - Engine + Duration
+      - Copy Source
+      - BOSMAX Copy Set
+      - MWTCB Copy Set
+      - Scene Context
+      - Overlay Allowed
+      - Target Language
+      - Platform
+      - Project Ecosystem Files
+      - part1_end_frame_requirement
+      - part1_final_frame_state
+      - part2_first_frame_state
+      - part2_first_0_5s_action
+      - part2_first_1s_lipsync_lock
+      - part2_no_vo_lock
+      - part2_no_cutaway_until_lipsync_established
+      - part2_dialogue_word_target
+      - continuation_qa_status
+    generated_fields:
+      - CompilerPayload_Generated
+      - CompilerPayload_Mismatch
+      - CompilerPayload_Wiring_Status
+      - CompilerPayload_Last_Generated_At
+      - CompilerPayload_Source_Signature
+    sample_stale_payload:
+      page: HYBRID Starter
+      issue: Payload hardcodes Aisyah / BOS_F_AISYAH_05 rather than deriving from selected Avatar Ai relation.
+
+  frames_operator_intake:
+    data_source: collection://e87788b4-1c0e-45df-91b4-4a8869a56c73
+    current_static_fields:
+      - Compiler Payload / RAW Prompt
+      - Output From Compiler
+    source_fields:
+      - Completed Frame Upload
+      - Frame Context
+      - Motion Delta
+      - Product
+      - Engine + Duration
+      - Copy Source
+      - BOSMAX Copy Set
+      - MWTCB Copy Set
+      - Overlay Allowed
+      - Target Language
+      - Platform
+      - Project Ecosystem Files
+      - part1_end_frame_requirement
+      - part1_final_frame_state
+      - part2_first_frame_state
+      - part2_first_0_5s_action
+      - part2_first_1s_lipsync_lock
+      - part2_no_vo_lock
+      - part2_no_cutaway_until_lipsync_established
+      - part2_dialogue_word_target
+      - continuation_qa_status
+    generated_fields:
+      - CompilerPayload_Generated
+      - CompilerPayload_Mismatch
+      - CompilerPayload_Wiring_Status
+      - CompilerPayload_Last_Generated_At
+      - CompilerPayload_Source_Signature
+
+  ingredients_operator_intake:
+    data_source: collection://e179ea64-9691-4802-bbb6-cf896284a709
+    current_static_fields:
+      - Compiler Payload / RAW Prompt
+      - Output From Compiler
+    source_fields:
+      - Product Reference Photo
+      - Avatar Reference Photo
+      - Style Scene Reference Photo
+      - Asset Role Map
+      - style_scene_source
+      - Scene Context
+      - Product
+      - Engine + Duration
+      - Copy Source
+      - BOSMAX Copy Set
+      - MWTCB Copy Set
+      - Overlay Allowed
+      - Target Language
+      - Platform
+      - Project Ecosystem Files
+      - part1_end_frame_requirement
+      - part1_final_frame_state
+      - part2_first_frame_state
+      - part2_first_0_5s_action
+      - part2_first_1s_lipsync_lock
+      - part2_no_vo_lock
+      - part2_no_cutaway_until_lipsync_established
+      - part2_dialogue_word_target
+      - continuation_qa_status
+    generated_fields:
+      - CompilerPayload_Generated
+      - CompilerPayload_Mismatch
+      - CompilerPayload_Wiring_Status
+      - CompilerPayload_Last_Generated_At
+      - CompilerPayload_Source_Signature
+
+validators:
+  avatar_ai:
+    - id: avatar_code_contains_character_name
+      rule: AvatarCode should contain the uppercase CharacterName token.
+      severity: high
+    - id: prompt_contains_character_name
+      rule: PromptV1 should contain the CharacterName token.
+      severity: high
+    - id: prompt_contains_avatar_code
+      rule: PromptV1 should contain AvatarCode.
+      severity: high
+
+  compiler_payload:
+    - id: payload_matches_engine_duration
+      rule: Compiler Payload / RAW Prompt should match selected Engine + Duration authority.
+      severity: critical
+    - id: payload_matches_product
+      rule: Compiler Payload / RAW Prompt should match selected Product authority and product_truth_ref.
+      severity: critical
+    - id: payload_matches_avatar
+      rule: HYBRID payload should match selected Avatar Ai or approved fallback.
+      severity: critical
+    - id: payload_matches_copy_set
+      rule: Compiler Payload / RAW Prompt should match selected BOSMAX or MWTCB copy set.
+      severity: critical
+    - id: payload_matches_asset_role_map
+      rule: INGREDIENTS payload should match selected Asset Role Map and style_scene_source.
+      severity: critical
+    - id: continuation_fields_included_for_multiblock
+      rule: Multi-block durations must include seam state, first 0.5s action, first 1s lipsync, no-VO, and no-cutaway controls.
+      severity: critical
+
+recommended_owner_split:
+  chatgpt_notion_connector:
+    - live_schema_patch
+    - sample_row_verification
+    - operator_facing_audit
+  codex:
+    - deterministic_generator_script
+    - stale_payload_validator_script
+    - bulk_regeneration
+    - repository_stored_contract
+  notion_ai:
+    - not_recommended_for_schema_governance
