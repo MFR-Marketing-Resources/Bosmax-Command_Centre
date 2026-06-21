@@ -2,7 +2,24 @@
 
 Status: draft repair contract
 Scope: Notion live database wiring, stale-field prevention, compiler payload regeneration governance
-Date: 2026-06-21
+Date: 2026-06-22
+
+## Repo implementation surface
+
+Repository-side dry-run implementation for this contract now lives in:
+
+- `scripts/notion_wiring_audit.py`
+- `config/notion-wiring-map.yaml`
+- `tests/fixtures/notion_wiring_fixture.json`
+- `tests/test_notion_wiring_audit.py`
+- `reports/notion_wiring_audit_SAMPLE.md`
+- `reports/notion_wiring_audit_SAMPLE.json`
+
+Current phase stays dry-run only:
+
+- `--source fixture` is fully supported.
+- `--source live` fail-closes with `LIVE_MODE_NOT_CONFIGURED`.
+- No live Notion write-back is allowed in this PR.
 
 ## Problem statement
 

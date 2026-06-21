@@ -1,6 +1,14 @@
-version: 0.1.0
+version: 0.2.0
 status: draft_repair_contract
-updated_at: '2026-06-21'
+updated_at: '2026-06-22'
+
+defaults:
+  source: fixture
+  target: all
+  dry_run: true
+  format: markdown
+  fail_on: critical
+  fixture_path: tests/fixtures/notion_wiring_fixture.json
 
 notion_wiring_principles:
   primary_workflows:
@@ -21,6 +29,11 @@ notion_wiring_principles:
 sources:
   avatar_ai:
     data_source: collection://3854775a-f48a-80a7-9365-000bbe671ff7
+    target_key: avatar
+    row_name_field: Name
+    character_name_field: CharacterName
+    manual_avatar_code_field: AvatarCode
+    manual_prompt_field: PromptV1
     current_static_fields:
       - AvatarCode
       - PromptV1
@@ -45,6 +58,26 @@ sources:
       - Avatar_Wiring_Status
       - Avatar_Last_Generated_At
       - Avatar_Generation_Source
+    generated_field_map:
+      avatar_code: AvatarCode_Generated
+      prompt: PromptV1_Generated
+      mismatch_code: AvatarCode_Mismatch
+      mismatch_prompt: PromptV1_Mismatch
+      status: Avatar_Wiring_Status
+      generated_at: Avatar_Last_Generated_At
+      source: Avatar_Generation_Source
+    role_fields:
+      - role
+      - Role
+      - usage_tags
+      - UsageTags
+    female_gender_tokens:
+      - F
+      - FEMALE
+      - WOMAN
+      - GIRL
+      - LADY
+    default_gender_code: F
     sample_broken_page:
       title: Kenduri 05
       observed_character_name: Zara
@@ -54,6 +87,9 @@ sources:
 
   hybrid_operator_intake:
     data_source: collection://a47a36cc-ca74-40f7-88d3-2bd9ad67987d
+    target_key: hybrid
+    row_name_field: Name
+    manual_payload_field: Compiler Payload / RAW Prompt
     current_static_fields:
       - Compiler Payload / RAW Prompt
       - Output From Compiler
@@ -86,12 +122,38 @@ sources:
       - CompilerPayload_Wiring_Status
       - CompilerPayload_Last_Generated_At
       - CompilerPayload_Source_Signature
+    generated_field_map:
+      payload: CompilerPayload_Generated
+      mismatch: CompilerPayload_Mismatch
+      status: CompilerPayload_Wiring_Status
+      generated_at: CompilerPayload_Last_Generated_At
+      source_signature: CompilerPayload_Source_Signature
+    continuation_aliases:
+      part1_final_frame_state:
+        - part1_final_frame_state
+      part2_first_frame_state:
+        - part2_first_frame_state
+      part2_first_0_5s_action:
+        - part2_first_0_5s_action
+      part2_first_1s_lipsync_lock:
+        - part2_first_1s_lipsync_lock
+      part2_no_vo_lock:
+        - part2_no_vo_lock
+        - part2_no_voiceover_lock
+      part2_no_cutaway_until_lipsync_established:
+        - part2_no_cutaway_until_lipsync_established
+        - part2_no_product_cutaway_until_lipsync_established
+      part2_dialogue_word_target:
+        - part2_dialogue_word_target
     sample_stale_payload:
       page: HYBRID Starter
       issue: Payload hardcodes Aisyah / BOS_F_AISYAH_05 rather than deriving from selected Avatar Ai relation.
 
   frames_operator_intake:
     data_source: collection://e87788b4-1c0e-45df-91b4-4a8869a56c73
+    target_key: frames
+    row_name_field: Name
+    manual_payload_field: Compiler Payload / RAW Prompt
     current_static_fields:
       - Compiler Payload / RAW Prompt
       - Output From Compiler
@@ -123,9 +185,18 @@ sources:
       - CompilerPayload_Wiring_Status
       - CompilerPayload_Last_Generated_At
       - CompilerPayload_Source_Signature
+    generated_field_map:
+      payload: CompilerPayload_Generated
+      mismatch: CompilerPayload_Mismatch
+      status: CompilerPayload_Wiring_Status
+      generated_at: CompilerPayload_Last_Generated_At
+      source_signature: CompilerPayload_Source_Signature
 
   ingredients_operator_intake:
     data_source: collection://e179ea64-9691-4802-bbb6-cf896284a709
+    target_key: ingredients
+    row_name_field: Name
+    manual_payload_field: Compiler Payload / RAW Prompt
     current_static_fields:
       - Compiler Payload / RAW Prompt
       - Output From Compiler
@@ -160,6 +231,12 @@ sources:
       - CompilerPayload_Wiring_Status
       - CompilerPayload_Last_Generated_At
       - CompilerPayload_Source_Signature
+    generated_field_map:
+      payload: CompilerPayload_Generated
+      mismatch: CompilerPayload_Mismatch
+      status: CompilerPayload_Wiring_Status
+      generated_at: CompilerPayload_Last_Generated_At
+      source_signature: CompilerPayload_Source_Signature
 
 validators:
   avatar_ai:

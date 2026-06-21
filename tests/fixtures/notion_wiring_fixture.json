@@ -1,0 +1,98 @@
+{
+  "avatar": [
+    {
+      "Name": "Kenduri 05",
+      "CharacterName": "Zara",
+      "GenderCode": "F",
+      "AvatarCode": "BOS_F_AISYAH_05",
+      "PromptV1": "Create a photorealistic avatar reference image. Identity: Aisyah, Code: BOS_F_AISYAH_05. Commercial-safe wardrobe and market-ready expression.",
+      "Wardrobe": "Soft peach baju kurung with neat drape",
+      "HairStyle": "Pinned-back dark hair",
+      "SkinTone": "Warm medium tan",
+      "Expression": "Friendly confident smile",
+      "Environment": "Kampung home interior",
+      "Lighting": "Warm window light",
+      "Camera": "Head-and-shoulders portrait",
+      "role": "family celebration host"
+    },
+    {
+      "Name": "Kenduri 05",
+      "CharacterName": "Zara",
+      "GenderCode": "F",
+      "AvatarCode": "BOS_F_ZARA_05",
+      "PromptV1": "Create a photorealistic avatar reference image. Identity: Zara, Code: BOS_F_ZARA_05. Commercial-safe wardrobe and market-ready expression.",
+      "Wardrobe": "Soft peach baju kurung with neat drape",
+      "HairStyle": "Pinned-back dark hair",
+      "SkinTone": "Warm medium tan",
+      "Expression": "Friendly confident smile",
+      "Environment": "Kampung home interior",
+      "Lighting": "Warm window light",
+      "Camera": "Head-and-shoulders portrait",
+      "role": "family celebration host"
+    }
+  ],
+  "hybrid": [
+    {
+      "Name": "HYBRID Starter",
+      "SelectedAvatarName": "Zara",
+      "SelectedAvatarCode": "BOS_F_ZARA_05",
+      "ProductTruthRef": "BOSMAX_SERUM_TRUTH_V1",
+      "Engine": "GOOGLE_FLOW",
+      "Duration": "16s",
+      "Compiler Payload / RAW Prompt": "Legacy payload hardcodes Aisyah and BOS_F_AISYAH_05 for a 16s GOOGLE_FLOW serum script. Hook: Kulit cepat kusam? CTA: Grab sekarang.",
+      "CopySet": {
+        "hook": "Kulit cepat kusam lepas kerja?",
+        "body": "BOSMAX Serum bantu nampak lebih segar dan kemas untuk kamera harian.",
+        "cta": "Grab sekarang dan cuba rutin ringkas ini."
+      },
+      "RequiresContinuation": true,
+      "Continuation": {
+        "part1_final_frame_state": "",
+        "part2_first_frame_state": "",
+        "part2_first_0_5s_action": "",
+        "part2_first_1s_lipsync_lock": "",
+        "part2_no_voiceover_lock": "",
+        "part2_no_product_cutaway_until_lipsync_established": "",
+        "part2_dialogue_word_target": {}
+      }
+    }
+  ],
+  "frames": [
+    {
+      "Name": "FRAMES Continuation Sample",
+      "SelectedAvatarName": "Zara",
+      "SelectedAvatarCode": "BOS_F_ZARA_05",
+      "ProductTruthRef": "BOSMAX_SERUM_TRUTH_V1",
+      "Engine": "GOOGLE_FLOW",
+      "Duration": "16s",
+      "Completed Frame Upload": "frame://kenduri-05-final.png",
+      "Frame Context": "Presenter already holding BOSMAX Serum at chest height in kampung dining room.",
+      "Motion Delta": "Continue with small wrist lift and direct-to-camera explanation.",
+      "Compiler Payload / RAW Prompt": "Mode: FRAMES. Avatar: Zara. Avatar code: BOS_F_ZARA_05. Product truth ref: BOSMAX_SERUM_TRUTH_V1. Engine: GOOGLE_FLOW. Duration: 16s. Use frame://kenduri-05-final.png as the visual truth. Presenter already holding BOSMAX Serum at chest height in kampung dining room. Continue with small wrist lift and direct-to-camera explanation."
+    }
+  ],
+  "ingredients": [
+    {
+      "Name": "INGREDIENTS Style Optional",
+      "SelectedAvatarName": "Zara",
+      "SelectedAvatarCode": "BOS_F_ZARA_05",
+      "ProductTruthRef": "BOSMAX_SERUM_TRUTH_V1",
+      "Engine": "GOOGLE_FLOW",
+      "Duration": "16s",
+      "Product Reference": [
+        "product://bosmax-serum-front.png"
+      ],
+      "Avatar Reference": [
+        "avatar://zara-reference.png"
+      ],
+      "Style Image": [],
+      "style_scene_source": "SCENE_CONTEXT_ONLY",
+      "Asset Role Map": {
+        "product_reference_role": "PRODUCT_TRUTH",
+        "avatar_reference_role": "AVATAR_IDENTITY",
+        "style_scene_role": "SCENE_CONTEXT_ONLY"
+      },
+      "Compiler Payload / RAW Prompt": "Mode: INGREDIENTS. Avatar: Zara. Avatar code: BOS_F_ZARA_05. Product truth ref: BOSMAX_SERUM_TRUTH_V1. Engine: GOOGLE_FLOW. Duration: 16s. PRODUCT_TRUTH > AVATAR_IDENTITY > STYLE_SCENE. style_scene_source: SCENE_CONTEXT_ONLY. Product reference and avatar reference are present; style image intentionally omitted."
+    }
+  ]
+}
